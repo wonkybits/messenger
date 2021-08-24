@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Send Message</title>
+    <%- include('./partials/head'); %>
+</head>
+<body>
+<header>
+    <%- include('./partials/header'); %>
+</header>
+<div class="grid-container">
+    <div class="cell large-12">
+        <form method="post" action="/messages">
+            <div class="grid-container">
+                <div class="gid-x grid-margin-x">
+                    <div class="cell medium-6">
+                        <label>Recipient
+                            <input id="recipient" name="recipient" type="text" placeholder="Recipient Name"/>
+                        </label>
+                    </div>
+                    <div class="cell medium-6">
+                        <label>Message
+                            <textarea id="message" name="message" placeholder="Type Something..." rows="5"></textarea>
+                        </label>
+                    </div>
+                    <div class="cell medium-6">
+                        <button type="submit" id="submit-btn" value="Submit" class="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+</body>
+</html>

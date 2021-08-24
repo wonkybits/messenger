@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Messages</title>
+    <%- include('./partials/head'); %>
+</head>
+<body>
+<header>
+    <%- include('./partials/header'); %>
+</header>
+<div class="grid-container">
+    <div class="cell large-12">
+        <table>
+            <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Message</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%- data %>
+            </tbody>
+        </table>
+    </div>
+    <div class="cell large-12">
+        <a href="/send" class="button">Send Message</a>
+    </div>
+</div>
+<footer>
+    <%- include('./partials/footer'); %>
+</footer>
+</body>
+</html>
