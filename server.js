@@ -5,7 +5,7 @@ const path = require('path');
 const MessageModel = require('./model/message-model');
 const UserModel = require('./model/user-model');
 
-const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/RTS-APP-DB';
+const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/test-db';
 
 const app = express();
 const port = process.env.PORT || 3000;
