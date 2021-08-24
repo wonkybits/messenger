@@ -1,19 +1,12 @@
-<html>
-<head>
-    <title>Login</title>
-    <%- include('./partials/head'); %>
-</head>
-<body>
+<%- include('./partials/header'); %>
 <header>
-    <%- include('./partials/header'); %>
+
 </header>
 <div class="grid-container">
     <div class="cell large-12">
-        <p>login</p>
+        <% if(this.name) { %>
+            <p><%- name %> has bee registered.</p>
+        <% } %>
     </div>
 </div>
-<footer>
-    <%- include('./partials/footer'); %>
-</footer>
-</body>
-</html>
+<%- include('./partials/footer'); %>

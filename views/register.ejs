@@ -1,0 +1,36 @@
+<%- include('./partials/header'); %>
+<div class="grid-container">
+    <div class="cell large-12">
+        <form method="post" action="/register">
+            <div class="grid-container">
+                <div class="gid-x grid-margin-x">
+                    <div class="cell medium-6">
+                        <label>Name
+                            <input id="name" name="name" type="text" placeholder="Ex: Jeff Lebowski"/>
+                        </label>
+                    </div>
+                    <div class="cell medium-6">
+                        <label>User ID
+                            <input id="userID" name="userID" type="text" placeholder="Ex: wonderboy27"/>
+                        </label>
+                    </div>
+                    <div class="cell medium-6">
+                        <label>Password
+                            <input id="pwd1" name="pwd1" type="text" placeholder="Type something..."/>
+                        </label>
+                    </div>
+                    <div class="cell medium-6">
+                        <label>Repeat Password
+                            <input id="pwd2" name="pwd2" type="text" placeholder="Type the same thing..."/>
+                        </label>
+                    </div>
+                    <input type="hidden" name="password" id="password" value="test">
+                    <div class="cell medium-6">
+                        <button type="submit" id="submit-btn" value="Submit" class="button">Register</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('./partials/footer'); %>

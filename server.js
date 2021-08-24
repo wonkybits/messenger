@@ -2,9 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-const MessageModel= require('./model');
+const MessageModel = require('./model/message-model');
+const UserModel = require('./model/user-model');
 
-const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/MerkleUsers';
+const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/RTS-APP-DB';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,6 +32,23 @@ app.get('/', (req, res) => {
    res.render('login');
 });
 
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    const newUser = new UserModel(req.body);
+    console.log(newUser);
+    newUser.save((err, msg) => {
+        if(err) return console.log(err);
+        res.render('login', { name: req.body.name });
+    });
+});
+
 app.get('/messages', (req, res) => {
     MessageModel.find({ recipient: user }).sort({date: 'desc'}).exec((err, records) => {
         if(err) console.error(err);
@@ -41,7 +59,7 @@ app.get('/messages', (req, res) => {
                 "<td>" + curr.date + "</td>\n" +
                 "</tr>";
         }, '');
-        res.render('messages', { data: messages });
+        res.render('messages', { data: messages, page: 'messages' });
     });
 });
 
@@ -52,26 +70,11 @@ app.post('/messages', (req, res) => {
     newMessage.save((err, msg) => {
         if(err) return console.log(err);
         res.redirect('messages');
-    })
+    });
 });
-
 
 app.get('/send', (req, res) => {
-    res.render('send');
-});
-
-app.get('/admin', (req, res) => {
-    MessageModel.find({}).sort({date: 'desc'}).exec((err, records) => {
-        if(err) console.error(err);
-        let messages = records.reduce((acc, curr) => {
-            return acc + "<tr>\n" +
-                "<td>" + curr.recipient + "</td>\n" +
-                "<td>" + curr.message + "</td>\n" +
-                "<td>" + curr.date + "</td>\n" +
-                "</tr>";
-        }, '');
-        res.render('messages', { data: messages });
-    });
+    res.render('send', { page: 'send' });
 });
 
 app.get('*', (req, res) => {

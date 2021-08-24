@@ -16,7 +16,7 @@ let Message = new Schema(
             type: Date
         }
     },
-    { collection: "RTS-Messages"}
+    { collection: "RTSMessages"}
 );
 
 module.exports = mongoose.model("messages", Message);
