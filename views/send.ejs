@@ -9,7 +9,11 @@
                 <div class="gid-x grid-margin-x">
                     <div class="cell medium-6">
                         <label>Recipient
-                            <input id="recipient" name="recipient" type="text" placeholder="Recipient Name"/>
+<!--                            <input id="recipient" name="recipient" type="text" placeholder="Recipient Name"/>-->
+                            <select name="recipient" id="recipient">
+                                <option value="">Select recipient</option>
+                                <%- data %>
+                            </select>
                         </label>
                     </div>
                     <div class="cell medium-6">

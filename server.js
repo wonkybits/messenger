@@ -74,7 +74,13 @@ app.post('/messages', (req, res) => {
 });
 
 app.get('/send', (req, res) => {
-    res.render('send', { page: 'send' });
+    UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
+        if(err) console.error(err);
+        let users = records.reduce((acc, curr) => {
+            return acc + '<option value="' + curr.name + '">' + curr.name + '</option>';
+        }, '');
+        res.render('send', { data: users, page: 'send' });
+    });
 });
 
 app.get('*', (req, res) => {
