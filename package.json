@@ -6,20 +6,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "start-dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-openid-connect": "^2.5.0",
+    "express-session": "^1.17.2",
     "express-validator": "^6.12.0",
     "foundation-sites": "^6.6.3",
     "gulp": "^4.0.2",
     "gulp-watch": "^5.0.1",
     "jquery": "^3.6.0",
-    "mongoose": "^5.13.2"
+    "mongoose": "^5.13.2",
+    "passport": "^0.4.1",
+    "passport-auth0": "^1.4.0"
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",
