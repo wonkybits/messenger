@@ -3,12 +3,12 @@
         <div class="top-bar-left">
             <ul class="menu">
                 <li class="menu-text">Messenger</li>
-                <% if(page == 'messages') { %>
+                <% if(locals.page == 'messages') { %>
                     <li class="is-active"><a href="#">Messages</a></li>
                 <% } else { %>
                     <li class=""><a href="./messages">Messages</a></li>
                 <% } %>
-                <% if(page == 'send') { %>
+                <% if(locals.page == 'send') { %>
                     <li class="is-active"><a href="#">Send Message</a></li>
                 <% } else { %>
                     <li class=""><a href="./send">Send Message</a></li>

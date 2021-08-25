@@ -4,7 +4,7 @@
 </header>
 <div class="grid-container">
     <div class="cell large-12">
-        <form data-abide method="post" action="/register">
+        <form data-abide method="post" action="/login">
             <div class="grid-container">
                 <div class="grid-x grid-margin-x">
                     <div class="cell medium-6">
@@ -13,12 +13,12 @@
                         </label>
                     </div>
                     <div class="cell medium-6">
-                        <label>User ID
+                        <label>User ID, do not use <, >, &, ', " or /
                             <input id="userID" name="userID" type="text" placeholder="Ex: wonderboy27" pattern="alpha_numeric" required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
-                        <label>Password
+                        <label>Password, do not use <, >, &, ', " or /
                             <input id="pwd1" name="pwd1" type="text" placeholder="Type something..." required/>
                         </label>
                     </div>
@@ -27,13 +27,18 @@
                             <input id="pwd2" name="pwd2" type="text" placeholder="Type the same thing..." required/>
                         </label>
                     </div>
-                    <input type="hidden" name="password" id="password" value="test">
+                    <input type="hidden" name="password" id="password" value="">
                     <div class="cell medium-6">
                         <button type="submit" id="submit-btn" value="Submit" class="button">Register</button>
                     </div>
                     <div class="cell medium-6">
                         <% if(locals.err_msg) { %>
                             <p><%- err_msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="cell medium-12">
+                        <% if(locals.parsedErrors) { %>
+                            <p><%- parsedErrors %></p>
                         <% } %>
                     </div>
                 </div>

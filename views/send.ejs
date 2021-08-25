@@ -12,7 +12,9 @@
                         <label>Recipient
                             <select name="recipient" id="recipient" required>
                                 <option value="">Select recipient</option>
-                                <%- data %>
+
+                                <option value="Joe">Joe</option>
+                                <option value="Mike">Mike</option>
                             </select>
                         </label>
                     </div>
@@ -23,6 +25,11 @@
                     </div>
                     <div class="cell medium-6">
                         <button type="submit" id="submit-btn" value="Submit" class="button">Submit</button>
+                    </div>
+                    <div class="cell medium-12">
+                        <% if(locals.parsedErrors) { %>
+                            <p><%- parsedErrors %></p>
+                        <% } %>
                     </div>
                 </div>
             </div>

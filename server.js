@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 const path = require('path');
 const MessageModel = require('./model/message-model');
 const UserModel = require('./model/user-model');
+const { validationResult } = require('express-validator');
+
+//validators
+const validators = require('./validation/validators');
 
 const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/test-db';
 
@@ -36,26 +40,34 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.get('/register', (req, res) => {
-    res.render('register');
+app.post('/login', validators.userValidators, (req, res) => {
+    const errors = validationResult(req).formatWith(({location, msg, param, value, nestedErrors}) => {
+        return `${param}[${escape(value)}]: ${msg}`;
+    });
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        res.render('register', { parsedErrors: validators.ValidationErrorOutput(errors.array()) });
+    } else {
+        console.log(req.body);
+        UserModel.find({ name: req.body.name }, (err, docs) => {
+            if(err) console.error(err);
+            console.log('docs.length = ' + docs.length);
+            if(docs.length > 0) {
+                res.render('register', { err_msg: "User already exists, please try again." });
+            } else {
+                const newUser = new UserModel(req.body);
+                console.log(newUser);
+                newUser.save((err, msg) => {
+                    if(err) return console.log(err);
+                    res.render('login', { name: req.body.name });
+                });
+            }
+        });
+    }
 });
 
-app.post('/register', (req, res) => {
-    UserModel.find({ name: req.body.name }, (err, docs) => {
-        if(err) console.error(err);
-        console.log('docs.length = ' + docs.length);
-        if(docs.length > 0) {
-            res.render('register', { err_msg: "User already exists, please try again." });
-        } else {
-            const newUser = new UserModel(req.body);
-            console.log(newUser);
-            newUser.save((err, msg) => {
-                if(err) return console.log(err);
-                res.render('login', { name: req.body.name });
-            });
-        }
-    });
-    // res.render('login', { name: req.body.name });
+app.get('/register', (req, res) => {
+    res.render('register');
 });
 
 app.get('/messages', (req, res) => {
@@ -72,14 +84,22 @@ app.get('/messages', (req, res) => {
     });
 });
 
-app.post('/messages', (req, res) => {
-    const newMessage = new MessageModel(req.body);
-    newMessage.userID = 'test';
-    newMessage.date = new Date(Date.now()).toISOString();
-    newMessage.save((err, msg) => {
-        if(err) return console.log(err);
-        res.redirect('messages');
+app.post('/messages', validators.messageValidators, (req, res) => {
+    const errors = validationResult(req).formatWith(({location, msg, param, value, nestedErrors}) => {
+        return `${param}[${escape(value)}]: ${msg}`;
     });
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        res.render('send', { parsedErrors: validators.ValidationErrorOutput(errors.array()) });
+    } else {
+        const newMessage = new MessageModel(req.body);
+        newMessage.userID = 'test';
+        newMessage.date = new Date(Date.now()).toISOString();
+        newMessage.save((err, msg) => {
+            if(err) return console.log(err);
+            res.redirect('messages');
+        });
+    }
 });
 
 app.get('/send', (req, res) => {
