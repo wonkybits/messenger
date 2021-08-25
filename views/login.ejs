@@ -1,12 +1,26 @@
 <%- include('./partials/header'); %>
 <header>
-
+    <%- include('./partials/masthead'); %>
 </header>
 <div class="grid-container">
-    <div class="cell large-12">
-        <% if(this.name) { %>
-            <p><%- name %> has bee registered.</p>
-        <% } %>
-    </div>
+    <form data-abide method="post" action="">
+        <div class="grid-container">
+            <div class="gid-x grid-margin-x">
+                <div class="cell medium-6">
+                    <label>Login
+                        <input id="login" name="login" type="text" required/>
+                    </label>
+                </div>
+                <div class="cell medium-6">
+                    <label>Password
+                        <input id="password" name="password" type="text" required/>
+                    </label>
+                </div>
+                <div class="cell medium-6">
+                    <button type="submit" id="submit-btn" value="Submit" class="button">Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <%- include('./partials/footer'); %>

@@ -1,0 +1,24 @@
+.masthead {
+  padding: 10px 15px;
+
+  .cell {
+    display: flex;
+    align-items: center;
+
+    &.left {
+      justify-content: left;
+
+      span {
+        font-size: 36px;
+        font-weight: bold;
+      }
+    }
+
+    &.right {
+      justify-content: right;
+      span {
+        font-size: 24px;
+      }
+    }
+  }
+}

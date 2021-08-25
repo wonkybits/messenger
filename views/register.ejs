@@ -1,27 +1,30 @@
 <%- include('./partials/header'); %>
+<header>
+    <%- include('./partials/masthead'); %>
+</header>
 <div class="grid-container">
     <div class="cell large-12">
-        <form method="post" action="/register">
+        <form data-abide method="post" action="/register">
             <div class="grid-container">
                 <div class="gid-x grid-margin-x">
                     <div class="cell medium-6">
                         <label>Name
-                            <input id="name" name="name" type="text" placeholder="Ex: Jeff Lebowski"/>
+                            <input id="name" name="name" type="text" placeholder="Ex: Jeff Lebowski" pattern="alpha" required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
                         <label>User ID
-                            <input id="userID" name="userID" type="text" placeholder="Ex: wonderboy27"/>
+                            <input id="userID" name="userID" type="text" placeholder="Ex: wonderboy27" pattern="alpha_numeric" required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
                         <label>Password
-                            <input id="pwd1" name="pwd1" type="text" placeholder="Type something..."/>
+                            <input id="pwd1" name="pwd1" type="text" placeholder="Type something..." required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
                         <label>Repeat Password
-                            <input id="pwd2" name="pwd2" type="text" placeholder="Type the same thing..."/>
+                            <input id="pwd2" name="pwd2" type="text" placeholder="Type the same thing..." required/>
                         </label>
                     </div>
                     <input type="hidden" name="password" id="password" value="test">

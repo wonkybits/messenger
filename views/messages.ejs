@@ -1,24 +1,27 @@
 <%- include('./partials/header'); %>
 <header>
+    <%- include('./partials/masthead'); %>
     <%- include('./partials/topnav'); %>
 </header>
-<div class="grid-container">
-    <div class="cell large-12">
-        <table>
-            <thead>
-            <tr>
-                <th>Sender</th>
-                <th>Message</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%- data %>
-            </tbody>
-        </table>
+<section class="main">
+    <div class="grid-container">
+        <div class="cell large-12">
+            <table>
+                <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%- data %>
+                </tbody>
+            </table>
+        </div>
+        <div class="cell large-12">
+            <a href="/send" class="button">Send Message</a>
+        </div>
     </div>
-    <div class="cell large-12">
-        <a href="/send" class="button">Send Message</a>
-    </div>
-</div>
+</section>
 <%- include('./partials/footer'); %>

@@ -4758,3 +4758,21 @@ html.is-reveal-open {
     .hide-for-landscape,
     .show-for-portrait {
       display: block !important; } }
+
+.masthead {
+  padding: 10px 15px; }
+  .masthead .cell {
+    display: flex;
+    align-items: center; }
+    .masthead .cell.left {
+      justify-content: left; }
+      .masthead .cell.left span {
+        font-size: 36px;
+        font-weight: bold; }
+    .masthead .cell.right {
+      justify-content: right; }
+      .masthead .cell.right span {
+        font-size: 24px; }
+
+.top-bar {
+  margin-bottom: 15px; }

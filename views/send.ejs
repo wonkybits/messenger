@@ -1,16 +1,16 @@
 <%- include('./partials/header'); %>
 <header>
+    <%- include('./partials/masthead'); %>
     <%- include('./partials/topnav'); %>
 </header>
 <div class="grid-container">
     <div class="cell large-12">
-        <form method="post" action="/messages">
+        <form data-abide method="post" action="/messages">
             <div class="grid-container">
                 <div class="gid-x grid-margin-x">
                     <div class="cell medium-6">
                         <label>Recipient
-<!--                            <input id="recipient" name="recipient" type="text" placeholder="Recipient Name"/>-->
-                            <select name="recipient" id="recipient">
+                            <select name="recipient" id="recipient" required>
                                 <option value="">Select recipient</option>
                                 <%- data %>
                             </select>
@@ -18,7 +18,7 @@
                     </div>
                     <div class="cell medium-6">
                         <label>Message
-                            <textarea id="message" name="message" placeholder="Type Something..." rows="5"></textarea>
+                            <textarea id="message" name="message" placeholder="Type Something..." rows="5" required></textarea>
                         </label>
                     </div>
                     <div class="cell medium-6">
