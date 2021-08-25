@@ -41,12 +41,21 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    const newUser = new UserModel(req.body);
-    console.log(newUser);
-    newUser.save((err, msg) => {
-        if(err) return console.log(err);
-        res.render('login', { name: req.body.name });
+    UserModel.find({ name: req.body.name }, (err, docs) => {
+        if(err) console.error(err);
+        console.log('docs.length = ' + docs.length);
+        if(docs.length > 0) {
+            res.render('register', { err_msg: "User already exists, please try again." });
+        } else {
+            const newUser = new UserModel(req.body);
+            console.log(newUser);
+            newUser.save((err, msg) => {
+                if(err) return console.log(err);
+                res.render('login', { name: req.body.name });
+            });
+        }
     });
+    // res.render('login', { name: req.body.name });
 });
 
 app.get('/messages', (req, res) => {

@@ -6,10 +6,10 @@
     <div class="cell large-12">
         <form data-abide method="post" action="/register">
             <div class="grid-container">
-                <div class="gid-x grid-margin-x">
+                <div class="grid-x grid-margin-x">
                     <div class="cell medium-6">
                         <label>Name
-                            <input id="name" name="name" type="text" placeholder="Ex: Jeff Lebowski" pattern="alpha" required/>
+                            <input id="name" name="name" type="text" placeholder="Ex: Jeff Lebowski" pattern="full-name" required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
@@ -30,6 +30,11 @@
                     <input type="hidden" name="password" id="password" value="test">
                     <div class="cell medium-6">
                         <button type="submit" id="submit-btn" value="Submit" class="button">Register</button>
+                    </div>
+                    <div class="cell medium-6">
+                        <% if(locals.err_msg) { %>
+                            <p><%- err_msg %></p>
+                        <% } %>
                     </div>
                 </div>
             </div>
