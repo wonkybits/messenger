@@ -1,3 +1,9 @@
 .top-bar {
   margin-bottom: 15px;
+
+  .top-bar-right {
+    .logout {
+      margin: 0;
+    }
+  }
 }

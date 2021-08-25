@@ -4776,3 +4776,5 @@ html.is-reveal-open {
 
 .top-bar {
   margin-bottom: 15px; }
+  .top-bar .top-bar-right .logout {
+    margin: 0; }
