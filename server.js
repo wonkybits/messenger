@@ -29,7 +29,7 @@ db.once('open', () => {
     console.log("DB connection established.");
 });
 
-const user = 'Phil';
+const user = 'Phil Stene';
 
 //Routes
 app.get('/', (req, res) => {
@@ -49,7 +49,7 @@ app.post('/login', validators.userValidators, (req, res) => {
         res.render('register', { parsedErrors: validators.ValidationErrorOutput(errors.array()) });
     } else {
         console.log(req.body);
-        UserModel.find({ name: req.body.name }, (err, docs) => {
+        UserModel.find({ userID: req.body.userID, name: req.body.name }, (err, docs) => {
             if(err) console.error(err);
             console.log('docs.length = ' + docs.length);
             if(docs.length > 0) {

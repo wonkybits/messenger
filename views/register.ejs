@@ -4,7 +4,7 @@
 </header>
 <div class="grid-container">
     <div class="cell large-12">
-        <form data-abide method="post" action="/login">
+        <form class="registerForm" data-abide method="post" action="/login" onsubmit="return registerSubmit();">
             <div class="grid-container">
                 <div class="grid-x grid-margin-x">
                     <div class="cell medium-6">
@@ -19,24 +19,22 @@
                     </div>
                     <div class="cell medium-6">
                         <label>Password, do not use <, >, &, ', " or /
-                            <input id="pwd1" name="pwd1" type="text" placeholder="Type something..." required/>
+                            <input id="pwd1" name="pwd1" type="password" placeholder="Type something..." required/>
                         </label>
                     </div>
                     <div class="cell medium-6">
                         <label>Repeat Password
-                            <input id="pwd2" name="pwd2" type="text" placeholder="Type the same thing..." required/>
+                            <input id="pwd2" name="pwd2" type="password" placeholder="Type the same thing..." required/>
                         </label>
                     </div>
-                    <input type="hidden" name="password" id="password" value="">
+                    <input type="hidden" name="password" id="password" value="test">
                     <div class="cell medium-6">
                         <button type="submit" id="submit-btn" value="Submit" class="button">Register</button>
                     </div>
-                    <div class="cell medium-6">
+                    <div class="cell medium-6 error">
                         <% if(locals.err_msg) { %>
                             <p><%- err_msg %></p>
                         <% } %>
-                    </div>
-                    <div class="cell medium-12">
                         <% if(locals.parsedErrors) { %>
                             <p><%- parsedErrors %></p>
                         <% } %>
@@ -46,4 +44,18 @@
         </form>
     </div>
 </div>
+<script type="application/javascript">
+    function registerSubmit() {
+        const password = $('#pwd1').val();
+        const confirmPassword = $('#pwd2').val();
+
+        if(password !== confirmPassword) {
+            $('.registerForm .error').html('<p>Passwords do not match.</p>')
+            return false;
+        } else {
+            $('.registerForm #password').val(password);
+            return true;
+        }
+    }
+</script>
 <%- include('./partials/footer'); %>
