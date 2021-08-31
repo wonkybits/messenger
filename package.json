@@ -2,22 +2,25 @@
   "name": "messenger",
   "version": "1.0.0",
   "description": "messenger app for code test",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "start-dev": "nodemon server.js"
+    "start": "node bin/www",
+    "dev": "nodemon bin/www"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "debug": "^2.6.9",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-validator": "^6.12.0",
     "foundation-sites": "^6.6.3",
     "gulp": "^4.0.2",
     "gulp-watch": "^5.0.1",
+    "http-errors": "^1.7.2",
     "jquery": "^3.6.0",
     "mongoose": "^5.13.2"
   },
