@@ -1,21 +1,17 @@
 const { check } = require('express-validator');
 
 const userValidators = [
-    check('name')
+    check('firstname')
         .exists({ checkFalsy: true })
-        .withMessage('Name is required')
+        .withMessage('First Name is required')
         .isAlpha("en-US", { ignore: " " })
-        .withMessage('Name is in the wrong format.')
+        .withMessage('First Name is in the wrong format.')
         .escape(),
-    check('userID')
+    check('lastname')
         .exists({ checkFalsy: true })
-        .withMessage('User ID is required')
-        .isAscii()
-        .withMessage('User ID is in the wrong format.')
-        .escape(),
-    check('password')
-        .exists({ checkFalsy: true })
-        .withMessage('Password is required')
+        .withMessage('Last Name is required')
+        .isAlpha("en-US", { ignore: " " })
+        .withMessage('Last Name is in the wrong format.')
         .escape()
 ];
 

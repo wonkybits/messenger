@@ -28,7 +28,7 @@ router.post('/messages', validators.messageValidators, (req, res) => {
         res.render('send', { parsedErrors: validators.ValidationErrorOutput(errors.array()) });
     } else {
         const newMessage = new MessageModel(req.body);
-        newMessage.userID = 'test';
+        newMessage.username = 'test';
         newMessage.date = new Date(Date.now()).toISOString();
         newMessage.save((err, msg) => {
             if(err) return console.log(err);
