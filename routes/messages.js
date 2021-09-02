@@ -13,6 +13,7 @@ router.get('/messages', (req, res) => {
                 "<td>" + curr.recipient + "</td>\n" +
                 "<td>" + curr.message + "</td>\n" +
                 "<td>" + curr.date + "</td>\n" +
+                "<td><button class='button'>Delete</button></td>\n" +
                 "</tr>";
         }, '');
         res.render('messages', { data: messages, page: 'messages' });
