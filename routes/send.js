@@ -1,9 +1,10 @@
 const express = require('express');
 const UserModel = require("../model/user-model");
+const secured = require("../lib/middleware/secured");
 const router = express.Router();
 
 // send route
-router.get('/send', (req, res) => {
+router.get('/send', secured(), (req, res) => {
     UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
         if(err) console.error(err);
         let users = records.reduce((acc, curr) => {

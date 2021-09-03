@@ -12,17 +12,23 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.5",
     "debug": "^2.6.9",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "express-validator": "^6.12.0",
     "foundation-sites": "^6.6.3",
     "gulp": "^4.0.2",
     "gulp-watch": "^5.0.1",
     "http-errors": "^1.7.2",
     "jquery": "^3.6.0",
-    "mongoose": "^5.13.2"
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-auth0": "^1.4.0"
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",

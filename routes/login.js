@@ -3,38 +3,34 @@ const validators = require("../validation/validators");
 const {validationResult} = require("express-validator");
 const UserModel = require("../model/user-model");
 const router = express.Router();
+const passport = require('passport');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // login routes
 
-router.get('/login', (req, res) => {
-    // res.render('login');
-    res.render('register');
+// Perform the login, after login Auth0 will redirect to callback
+router.get('/login', passport.authenticate('auth0', {
+    scope: 'openid email profile'
+}), (req, res) => {
+    res.redirect('/messages');
 });
 
-// router.post('/login', (req, res) => {
-//     const errors = validationResult(req).formatWith(({location, msg, param, value, nestedErrors}) => {
-//         return `${param}[${escape(value)}]: ${msg}`;
-//     });
-//     if (!errors.isEmpty()) {
-//         console.log(errors.array());
-//         res.render('register', { parsedErrors: validators.ValidationErrorOutput(errors.array()) });
-//     } else {
-//         console.log(req.body);
-//         UserModel.find({ userID: req.body.userID, name: req.body.name }, (err, docs) => {
-//             if(err) console.error(err);
-//             console.log('docs.length = ' + docs.length);
-//             if(docs.length > 0) {
-//                 res.render('register', { err_msg: "User already exists, please try again." });
-//             } else {
-//                 const newUser = new UserModel(req.body);
-//                 console.log(newUser);
-//                 newUser.save((err, msg) => {
-//                     if(err) return console.log(err);
-//                     res.render('login', { name: req.body.name });
-//                 });
-//             }
-//         });
-//     }
-// });
+// Perform the final stage of authentication and redirect to previously requested URL or '/user'
+router.get('/callback', (req, res, next) => {
+    passport.authenticate('auth0', (err, user, info) => {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/'); }
+        req.logIn(user, (err) => {
+            console.log('*********************** in logIn ***********************');
+            console.log('user email = ' + user._json.email);
+            if (err) { return next(err); }
+            const returnTo = req.session.returnTo;
+            delete req.session.returnTo;
+            res.redirect(returnTo || '/messages');
+        });
+    })(req, res, next);
+});
 
 module.exports = router;

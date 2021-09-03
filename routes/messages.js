@@ -2,10 +2,11 @@ const express = require('express');
 const MessageModel = require("../model/message-model");
 const validators = require("../validation/validators");
 const {validationResult} = require("express-validator");
+const secured = require('../lib/middleware/secured');
 const router = express.Router();
 
 // messages routes
-router.get('/messages', (req, res) => {
+router.get('/messages', secured(), (req, res) => {
     MessageModel.find({  }).sort({date: 'desc'}).exec((err, records) => {
         if(err) console.error(err);
         let messages = records.reduce((acc, curr) => {
@@ -20,7 +21,7 @@ router.get('/messages', (req, res) => {
     });
 });
 
-router.post('/messages', validators.messageValidators, (req, res) => {
+router.post('/messages', secured(), validators.messageValidators, (req, res) => {
     const errors = validationResult(req).formatWith(({location, msg, param, value, nestedErrors}) => {
         return `${param}[${escape(value)}]: ${msg}`;
     });
