@@ -23,24 +23,18 @@ router.get('/callback', (req, res, next) => {
         if (err) { return next(err); }
         if (!user) { return res.redirect('/'); }
         req.logIn(user, (err) => {
-            console.log('*********************** in logIn ***********************');
-            console.log('user email = ' + user._json.email);
             if (err) { return next(err); }
             const returnTo = req.session.returnTo;
             delete req.session.returnTo;
             // redirect to /messages if user is in the system, otherwise redirect to /register
             UserModel.find({ username: user._json.email }).exec((err, records) => {
                 if(err) console.error(err);
-                console.log('returnTo = ' + returnTo);
                 // user found
                 if(records.length > 0) {
-                    console.log('********** user found **********');
-                    console.log(records);
                     res.redirect(returnTo || '/messages');
                 }
                 // user not found
                 else {
-                    console.log('********** user not found **********');
                     res.redirect(returnTo || '/register');
                 }
             });

@@ -6,7 +6,6 @@ const secured = require("../lib/middleware/secured");
 const router = express.Router();
 
 router.get('/register', secured(), (req, res) => {
-    console.log('register route');
     res.render('register');
 });
 
