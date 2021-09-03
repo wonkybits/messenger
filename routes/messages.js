@@ -7,16 +7,25 @@ const router = express.Router();
 
 // messages routes
 router.get('/messages', secured(), (req, res) => {
-    MessageModel.find({  }).sort({date: 'desc'}).exec((err, records) => {
+    const username = req.user._json.email;
+    MessageModel.find({ username: username }).sort({date: 'desc'}).exec((err, records) => {
+        let messages = "";
+
         if(err) console.error(err);
-        let messages = records.reduce((acc, curr) => {
-            return acc + "<tr>\n" +
-                "<td>" + curr.recipient + "</td>\n" +
-                "<td>" + curr.message + "</td>\n" +
-                "<td>" + curr.date + "</td>\n" +
-                "<td><button class='button'>Delete</button></td>\n" +
-                "</tr>";
-        }, '');
+
+        if(records.length > 0) {
+            messages = records.reduce((acc, curr) => {
+                return acc + "<tr>\n" +
+                    "<td>" + curr.recipient + "</td>\n" +
+                    "<td>" + curr.message + "</td>\n" +
+                    "<td>" + curr.date + "</td>\n" +
+                    "<td><button class='button'>Delete</button></td>\n" +
+                    "</tr>";
+            }, '');
+        } else {
+            messages = "<tr><td colspan='3'>No Messages.</td></tr>";
+        }
+
         res.render('messages', { data: messages, page: 'messages' });
     });
 });
