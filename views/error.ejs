@@ -3,6 +3,14 @@
     <%- include('./partials/masthead'); %>
 </header>
 <section>
-    <p>Error Page</p>
+    <div class="grid-container">
+        <div class="cell large-12">
+            <h2>Error Page</h2>
+        </div>
+        <div class="cell large-12">
+            <p><%- locals.message %></p>
+            <p><%- locals.err %></p>
+        </div>
+    </div>
 </section>
 <%- include('./partials/footer'); %>
