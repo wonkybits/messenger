@@ -19,8 +19,9 @@ const messageValidators = [
     check('recipient')
         .exists({ checkFalsy: true })
         .withMessage('Recipient is required')
-        .isAlpha("en-US", { ignore: " " })
-        .withMessage('Recipient is in the wrong format.')
+        // .normalizeEmail()
+        .isEmail()
+        .withMessage('Recipient must be a valid email address.')
         .escape(),
     check('message')
         .exists({ checkFalsy: true })

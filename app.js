@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash');
+const UserToView = require('./lib/middleware/userToView');
 const landingRouter = require('./routes/landing');
 const loginRouter = require('./routes/login');
 const logoutRouter = require('./routes/logout');
@@ -94,6 +95,8 @@ app.use(function (req, res, next) {
     }
     next();
 });
+
+app.use(UserToView());
 
 //Database connection
 const DBURL = process.env.mongodbURL || 'mongodb://127.0.0.1:27017/test-db';

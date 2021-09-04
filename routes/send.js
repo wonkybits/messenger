@@ -8,11 +8,14 @@ router.get('/send', secured(), (req, res) => {
     UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
         if(err) console.error(err);
         let recipients = '';
-        // if(records.length > 0) {
-        if(false) {
+        if(records.length > 0) {
             recipients += '<select name="recipient" id="recipient" required><option value="">Select recipient</option>';
             recipients += records.reduce((acc, curr) => {
-                return acc + '<option value="' + curr.name + '">' + curr.name + '</option>';
+                if(curr.username == req.user._json.email) {
+                    return acc;
+                } else {
+                    return acc + '<option value="' + curr.username + '">' + curr.firstname  + ' ' + curr.lastname + '</option>';
+                }
             }, '');
             recipients += '</select>';
         } else {
