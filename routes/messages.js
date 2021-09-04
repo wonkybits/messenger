@@ -8,7 +8,6 @@ const router = express.Router();
 // messages routes
 router.get('/messages', secured(), (req, res) => {
     const username = req.user._json.email;
-    console.log('username = ' + username);
     MessageModel.find({ recipient: username }).sort({date: 'desc'}).exec((err, records) => {
         let messages = "";
 
@@ -20,7 +19,7 @@ router.get('/messages', secured(), (req, res) => {
                     "<td>" + curr.sender + "</td>\n" +
                     "<td>" + curr.message + "</td>\n" +
                     "<td>" + curr.date + "</td>\n" +
-                    "<td><button class='button'>Delete</button></td>\n" +
+                    "<td><button class='button' onclick='javascript:window.location.href=\"/deletemsg?msgid=" + curr._id + "\"'>Delete</button></td>\n" +
                     "</tr>";
             }, '');
         } else {
