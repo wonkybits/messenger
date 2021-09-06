@@ -11,12 +11,9 @@ const Auth0Strategy = require('passport-auth0');
 const flash = require('connect-flash');
 const UserToView = require('./lib/middleware/userToView');
 const landingRouter = require('./routes/landing');
-const loginRouter = require('./routes/login');
-const logoutRouter = require('./routes/logout');
+const authRouter = require('./routes/auth');
 const registerRouter = require('./routes/register');
-const messagesRouter = require('./routes/messages');
-const sendRouter = require('./routes/send');
-const DeleteRouter = require('./routes/delete');
+const messagesRouter = require('./routes/messaging');
 const errorRouter = require('./routes/error');
 
 dotenv.config();
@@ -112,12 +109,9 @@ db.once('open', () => {
 
 // Routes
 app.use('/', landingRouter);
-app.use('/', loginRouter);
-app.use('/', logoutRouter);
+app.use('/', authRouter);
 app.use('/', registerRouter);
 app.use('/', messagesRouter);
-app.use('/', sendRouter);
-app.use('/', DeleteRouter);
 app.use('/', errorRouter);
 
 // Catch 404 and forward to error handler

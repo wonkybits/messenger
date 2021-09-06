@@ -1,11 +1,11 @@
 const express = require('express');
 const MessageModel = require("../model/message-model");
+const UserModel = require("../model/user-model");
 const validators = require("../validation/validators");
 const {validationResult} = require("express-validator");
 const secured = require('../lib/middleware/secured');
 const router = express.Router();
 
-// messages routes
 router.get('/messages', secured(), (req, res) => {
     const username = req.user._json.email;
     MessageModel.find({ recipient: username }).sort({date: 'desc'}).exec((err, records) => {
@@ -46,6 +46,36 @@ router.post('/messages', secured(), validators.messageValidators, (req, res) => 
             res.redirect('messages');
         });
     }
+});
+
+router.get('/deletemsg', (req, res) => {
+    console.log('msgid = ' + req.query.msgid);
+    MessageModel.findByIdAndDelete(req.query.msgid, (err) => {
+        if(err) console.log(err);
+        res.redirect('/messages');
+    });
+});
+
+router.get('/send', secured(), (req, res) => {
+    UserModel.find({}).sort({date: 'desc'}).exec((err, records) => {
+        if(err) console.error(err);
+        let recipients = '';
+        if(records.length > 0) {
+            recipients += '<select name="recipient" id="recipient" required><option value="">Select recipient</option>';
+            recipients += records.reduce((acc, curr) => {
+                if(curr.username == req.user._json.email) {
+                    return acc;
+                } else {
+                    return acc + '<option value="' + curr.username + '">' + curr.firstname  + ' ' + curr.lastname + '</option>';
+                }
+            }, '');
+            recipients += '</select>';
+        } else {
+            recipients += '<input id="recipient" name="recipient" type="text" placeholder="Ex: abcd@defg.com" pattern="email" required/>';
+        }
+
+        res.render('send', { recipients: recipients, page: 'send' });
+    });
 });
 
 module.exports = router;
